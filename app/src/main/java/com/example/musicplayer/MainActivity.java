@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         int duration=mediaPlayer.getDuration();
 
         String sDuration=convertFormat(duration);
+
         playerDuration.setText(sDuration);
         btplay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 int duration = mediaPlayer.getDuration();
 
                 if (mediaPlayer.isPlaying() && duration != currentPositin){
-
                     currentPositin = currentPositin+5000;
                     playerPosition.setText(convertFormat(currentPositin));
                     mediaPlayer.seekTo(currentPositin);
@@ -95,15 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btFf.setOnClickListener(new View.OnClickListener() {
+        btRew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int currentPositin = mediaPlayer.getCurrentPosition();
-                int duration = mediaPlayer.getDuration();
 
-                if (mediaPlayer.isPlaying() && duration > currentPositin){
+                if (mediaPlayer.isPlaying() && currentPositin > 5000){
 
-                    currentPositin = currentPositin-5000;
+                    currentPositin = currentPositin - 5000;
                     playerPosition.setText(convertFormat(currentPositin));
                     mediaPlayer.seekTo(currentPositin);
 
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     private String convertFormat(int duration) {
         return String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(duration),
-                TimeUnit.MILLISECONDS.toSeconds(duration)-TimeUnit.MINUTES.toSeconds((TimeUnit.MILLISECONDS.toMinutes(duration))));
+                TimeUnit.MILLISECONDS.toSeconds(duration)-TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
     }
 
 
